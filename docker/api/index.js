@@ -24,4 +24,4 @@ app.use(koaBody({ multipart: true }));
 app.use(json())
 require('./modules/routers/api.router')(router)
 app.use(router.routes())
-app.listen(3001, () => { console.log("working in port 3001")})
+app.listen(3000, () => { console.log("working in port 3000")})

@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.5.0",
     "async-get-file": "^1.0.4",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",

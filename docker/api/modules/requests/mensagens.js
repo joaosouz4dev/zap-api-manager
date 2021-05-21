@@ -15,14 +15,14 @@ module.exports = class Mensagens extends Groups {
             let number = ctx.request.body.number;
             let valid = number.indexOf('-') > -1 ? number + '@g.us' : await functions.validNumber(ctx)
             if (valid) {
-
-                let response = await data.client.sendText(valid, ctx.request.body.text)
+                let response = await data.client.sendText(valid, ctx.request.body.text);
+                // console.log(response)
                 let object = {
                     result: 200,
                     type: 'text',
-                    id: response.to._serialized,
-                    phone: response.to.remote.user,
-                    content: response.text
+                    id: response.chatId?._serialized,
+                    phone: response.chatId?.user,
+                    content: response.body
                 }
 
                 ctx.body = object
@@ -51,9 +51,9 @@ module.exports = class Mensagens extends Groups {
                 let object = {
                     result: 200,
                     type: 'image',
-                    id: response.to._serialized,
+                    id: response.chatId?._serialized,
                     session: ctx.request.headers['session'],
-                    phone: response.to.remote.user,
+                    phone: response.chatId?.user,
                     file: ctx.request.body.url,
                     content: response.text,
                     mimetype: response.mimeType
@@ -90,8 +90,8 @@ module.exports = class Mensagens extends Groups {
                         result: 200,
                         type: 'video',
                         session: ctx.request.headers['session'],
-                        id: response.to._serialized,
-                        phone: response.to.remote.user,
+                        id: response.chatId?._serialized,
+                        phone: response.chatId?.user,
                         file: name,
                         content: response.text,
                         mimetype: response.mimeType
@@ -132,9 +132,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'sticker',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         file: name,
                         content: response.text,
                         mimetype: response.mimeType
@@ -180,9 +180,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'file',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         file: name,
                         content: response.text,
                         mimetype: response.mimeType
@@ -223,9 +223,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'file',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         file: name,
                         content: response.text,
                         mimetype: response.mimeType
@@ -273,9 +273,9 @@ module.exports = class Mensagens extends Groups {
                         let object = {
                             result: 200,
                             type: 'audio',
-                            id: response.to._serialized,
+                            id: response.chatId?._serialized,
                             session: ctx.request.headers['session'],
-                            phone: response.to.remote.user,
+                            phone: response.chatId?.user,
                             file: name,
                             content: response.text,
                             mimetype: response.mimeType
@@ -326,15 +326,15 @@ module.exports = class Mensagens extends Groups {
                         let audio = await process
                         let mp3  = await audio.setAudioCodec('opus')
                         .fnExtractSoundToMP3(dir + name+'.mp3')
-
-                        let response = await data.client.sendVoice(valid, mp3)
-
+                        console.log(mp3)
+                        let response = await data.client.sendPtt(valid, mp3)
+                        console.log(response)
                         let object = {
                             result: 200,
                             type: 'ptt',
-                            id: response.to._serialized,
+                            id: response.chatId?._serialized,
                             session: ctx.request.headers['session'],
-                            phone: response.to.remote.user,
+                            phone: response.chatId?.user,
                             file: mp3,
                             content: response.text,
                             mimetype: response.mimeType
@@ -345,6 +345,7 @@ module.exports = class Mensagens extends Groups {
 
 
                     }catch(e){
+                        console.log(e)
                         ctx.body = {
                             result: 400,
                             "status": "FAIL"
@@ -388,9 +389,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'audio',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         file: name,
                         content: response.text,
                         mimetype: response.mimeType
@@ -433,9 +434,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'link',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         content: response.text
                     }
                     ctx.body = object
@@ -470,9 +471,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'contact',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         content: response.text
                     }
                     ctx.body = object
@@ -508,9 +509,9 @@ module.exports = class Mensagens extends Groups {
                     let object = {
                         result: 200,
                         type: 'locate',
-                        id: response.to._serialized,
+                        id: response.chatId?._serialized,
                         session: ctx.request.headers['session'],
-                        phone: response.to.remote.user,
+                        phone: response.chatId?.user,
                         content: response.text
                     }
                     ctx.body = object
