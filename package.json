@@ -1,0 +1,30 @@
+{
+  "name": "zap-api-manager",
+  "version": "1.0.0",
+  "description": "Manager of Docker for api's wpp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "docker",
+    "whatsapp",
+    "manager",
+    "docker",
+    "api",
+    "zap"
+  ],
+  "author": "Joao Victor Souza <web@joaovictorsouza.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "dockerode": "^3.2.1",
+    "dotenv": "^8.2.0",
+    "exec-sh": "^0.3.4",
+    "flatted": "^3.1.1",
+    "koa": "^2.13.0",
+    "koa-router": "^10.0.0",
+    "node-docker-api": "^1.1.22",
+    "node-wget-js": "^1.0.1"
+  }
+}
