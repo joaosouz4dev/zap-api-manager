@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update \
 && DEBIAN_FRONTEND="noninteractive" wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
 && DEBIAN_FRONTEND="noninteractive" dpkg -i google-chrome-stable_current_amd64.deb \
 && DEBIAN_FRONTEND="noninteractive" apt-get -y install ffmpeg \
-&& cd /home/api && npm install 
+&& cd /home/api && npm install && npm i --save @wppconnect-team/wppconnect
 
 WORKDIR /home/api/
 
